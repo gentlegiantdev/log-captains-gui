@@ -12,13 +12,16 @@
 <section class = 'col'>
     <h2>Input API Data Here</h2>
     <form action="/api" method="POST">
-        <input type="text" placeholder="name" name="name">
-        <input type="text" placeholder="speciesName" name="speciesName">
-        <textarea rows="5" cols="40" type="text" placeholder="features" name="features"></textarea>
-        <input type="text" placeholder="homeworld" name="homeworld">
+        <input type="text" placeholder="last name" name="name">
+        <input type="text" placeholder="full name" name="fullName">
+        <input type="text" placeholder="species" name="species">
+        <input type="text" placeholder="born" name="born">
+        <input type="text" placeholder="died" name="died">
         <input type="text" placeholder="image" name="image">
-        <textarea rows="5" cols="40" type="text" placeholder="interestingFact" name="interestingFact"></textarea>
-        <input type="text" placeholder="notableExamples" name="notableExamples">
+        <input type="text" placeholder="actor" name="actor">
+        <textarea rows="5" cols="40" type="text" placeholder="fun fact" name="funFact"></textarea>
+        <input type="text" placeholder="ship" name="ship">
+        <input type="text" placeholder="shipImage" name="shipImage">
         <button type="submit">SUBMIT NEW</button>
         <button type="button" id="updateButton">UDPATE EXISTING</button>
     </form>
@@ -27,10 +30,10 @@
     <h2>Delete API Data Here</h2>
     <input input type="text" placeholder="name to delete" name="deleteInput" id = "deleteInput"><button id="deleteButton">DELETE</button>
 
-    <h2>Current Aliens</h2>
-    <ul class="aliens">
+    <h2>Current Captains</h2>
+    <ul class="captains">
     <% for(let i=0; i < info.length; i++) {%>
-        <li class="alien">
+        <li class="captain">
             <span><%= info[i] %></span>
         </li>
     <% } %>

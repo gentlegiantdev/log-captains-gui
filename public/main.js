@@ -28,12 +28,15 @@ async function updateEntry(){
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
             name: document.getElementsByName("name")[0].value,
-            speciesName: document.getElementsByName("speciesName")[0].value,
-            features: document.getElementsByName("features")[0].value,
-            homeworld: document.getElementsByName("homeworld")[0].value,
+            fullName: document.getElementsByName("fullName")[0].value,
+            species: document.getElementsByName("species")[0].value,
+            born: document.getElementsByName("born")[0].value,
+            died: document.getElementsByName("died")[0].value,
             image: document.getElementsByName("image")[0].value,
-            interestingFact: document.getElementsByName("interestingFact")[0].value,
-            notableExamples: document.getElementsByName("notableExamples")[0].value
+            actor: document.getElementsByName("actor")[0].value,
+            funFact: document.getElementsByName("funFact")[0].value,
+            ship: document.getElementsByName("ship")[0].value,
+            shipImage: document.getElementsByName("shipImage")[0].value
         })
     })
     const data = await response.json()

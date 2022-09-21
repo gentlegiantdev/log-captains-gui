@@ -2,13 +2,13 @@
 const express = require('express')
 const app = express()
 const MongoClient = require('mongodb').MongoClient
-const PORT = 8000
+const PORT = 2525
 require('dotenv').config()
 
 //DECLARED DATABASE VARIABLES
 let db,
     dbConnectionStr = process.env.DB_STRING,
-    dbName = 'star-trek-api'
+    dbName = 'log-captains'
 
 //CONNECTED TO MONGODB
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
@@ -29,9 +29,9 @@ app.use(express.json())
 
 //CRUD METHODS
 app.get('/',(request, response)=>{
-    let contents = db.collection('alien-species-info').find().toArray()
+    let contents = db.collection('star-trek-captains').find().toArray()
     .then(data => {
-        let nameList = data.map(item => item.speciesName)
+        let nameList = data.map(item => item.fullName)
         console.log(nameList)
         response.render('index.ejs', { info: nameList })
     })
@@ -40,7 +40,7 @@ app.get('/',(request, response)=>{
 
 app.post('/api', (req,res) => {
     console.log('post heard')
-    db.collection('alien-species-info').insertOne(
+    db.collection('star-trek-captains').insertOne(
         req.body
     )
     .then(result => {
@@ -51,18 +51,18 @@ app.post('/api', (req,res) => {
 })
 
 //DOES NOT FUNCTION YET
-app.post('/massinsert', (req,res) => {
-    //const test = JSON.parse(req.body)
-    //console.log(test)
-    db.collection('alien-species-info').insertMany(
-        [{name: 'test',speciesName: 'test',features: 'test',homeworld: 'test',image: 'test',interestingFact: 'test',notableExamples: 'test'},{name: 'test2',speciesName: 'test2',features: 'test2',homeworld: 'test2',image: 'test2',interestingFact: 'test2',notableExamples: 'test2'}]
-    )
-    .then(result => {
-        console.log(result)
-        res.redirect('/')
-    })
-    .catch(error => console.error(error))
-})
+// app.post('/massinsert', (req,res) => {
+//     //const test = JSON.parse(req.body)
+//     //console.log(test)
+//     db.collection('alien-species-info').insertMany(
+//         [{name: 'test',speciesName: 'test',features: 'test',homeworld: 'test',image: 'test',interestingFact: 'test',notableExamples: 'test'},{name: 'test2',speciesName: 'test2',features: 'test2',homeworld: 'test2',image: 'test2',interestingFact: 'test2',notableExamples: 'test2'}]
+//     )
+//     .then(result => {
+//         console.log(result)
+//         res.redirect('/')
+//     })
+//     .catch(error => console.error(error))
+// })
 
 app.put('/updateEntry', (req,res) => {
     console.log(req.body)
@@ -72,7 +72,7 @@ app.put('/updateEntry', (req,res) => {
         }
       });
     console.log(req.body)
-    db.collection('alien-species-info').findOneAndUpdate(
+    db.collection('star-trek-captains').findOneAndUpdate(
         {name: req.body.name},
         {
             $set:  req.body  
@@ -89,7 +89,7 @@ app.put('/updateEntry', (req,res) => {
 })
 
 app.delete('/deleteEntry', (request, response) => {
-    db.collection('alien-species-info').deleteOne({name: request.body.name})
+    db.collection('star-trek-captains').deleteOne({name: request.body.name})
     .then(result => {
         console.log('Entry Deleted')
         response.json('Entry Deleted')
